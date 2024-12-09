@@ -8,7 +8,7 @@ function App() {
   return (
     <Router>
       <div className="App d-flex flex-column min-vh-100">
-        <NavBarComponent style={{ height: '8vh' }} />
+        <NavBarComponent />
         <main className="flex-grow-1" style={{ marginTop: '8vh' }}>
           <Routes>
             <Route path="/" element={<Agenda />} />

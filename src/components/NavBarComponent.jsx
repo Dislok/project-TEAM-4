@@ -8,7 +8,7 @@ import { links } from '../json/headerLinks';
 
 export const NavBarComponent = ({ style }) => {
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={style}>
+    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" style={{ height: '8vh' }}>
       <Container>
         <Navbar.Brand as={Link} to="/" className="fw-bold">Inicio</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -24,13 +24,24 @@ export const NavBarComponent = ({ style }) => {
                 >
                   {item.submenu.map((subItem, subIndex) => (
                     <NavDropdown.Item 
-                      as={Link} 
-                      to={subItem.subMenuUrl} 
-                      key={subIndex}
-                      className="submenu-item"
-                    >
-                      {subItem.subMenuNombre}
-                    </NavDropdown.Item>
+                    as={Link} 
+                    to={subItem.subMenuUrl} 
+                    key={subIndex}
+                    className="submenu-item"
+                    style={{
+                      transition: 'all 0.3s ease',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.backgroundColor = '#007bff';
+                      e.target.style.color = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.backgroundColor = '';
+                      e.target.style.color = '';
+                    }}
+                  >
+                    {subItem.subMenuNombre}
+                  </NavDropdown.Item>
                   ))}
                 </NavDropdown>
               ) : (
