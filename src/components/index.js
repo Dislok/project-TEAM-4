@@ -1,2 +1,4 @@
-export * from "./FooterComponent"
-export * from "./NavBarComponent"
+export * from "./Footer/FooterComponent"
+export * from "./Footer"
+export * from "./header"
+export * from "./CambioColor"

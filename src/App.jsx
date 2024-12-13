@@ -1,23 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { FooterComponent, NavBarComponent } from './components';
-import { Agenda } from './pages/Agenda/Agenda';
+import './themes.css';
+import { Rutas } from './routes/Rutas';
+import { ThemeProvider } from './context';
+import { Provider } from 'react-redux'
+import { store } from './store';
 
 function App() {
   return (
-    <Router>
-      <div className="App d-flex flex-column min-vh-100">
-        <NavBarComponent />
-        <main className="flex-grow-1" style={{ marginTop: '8vh' }}>
-          <Routes>
-            <Route path="/" element={<Agenda />} />
-            <Route path="/*" element={<Agenda />} />
-          </Routes>
-        </main>
-        <FooterComponent />
-      </div>
-    </Router>
+    <Provider store={store}>
+    <ThemeProvider>
+     <Rutas/>
+    </ThemeProvider>
+    </Provider>
   );
 }
 
