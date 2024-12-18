@@ -24,7 +24,7 @@ export const Agenda = () => {
     }
   };
 
-  const [events, setEvents] = useState(datos[0]);
+  const [events, setEvents] = useState(agenda);
   const [modalStatus, setModalStatus] = useState(false);
   const [eventData, setEventData] = useState([]);
     console.log(datos[0]);
