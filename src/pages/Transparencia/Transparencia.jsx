@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { Link } from "react-router";
 import "./Transparencia.css";
-import { rubros } from "../../json/rubros";
+import { useTransparencia } from "../../hooks";
 
 
 export const Transparencia = () => {
+  const { datos } = useTransparencia();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -15,7 +16,7 @@ export const Transparencia = () => {
         <div className="rubros_titulo">
           <h2>Articulo 69 Ley de Transparencia (48 Rubros)</h2>
         </div>
-        {rubros.map((item, index) => (
+        {datos[0].map((item, index) => (
           <Link
             key={index}
             to={`/Transparencia/Rubros/${item.nombre}`}

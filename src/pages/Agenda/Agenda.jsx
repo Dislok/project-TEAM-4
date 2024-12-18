@@ -6,8 +6,10 @@ import { useEffect, useRef, useState } from "react";
 
 import "./agenda.css";
 import { agenda } from "../../json/agenda";
+import { useAgendaStore } from "../../hooks";
 
 export const Agenda = () => {
+  const { datos } = useAgendaStore();
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
 
@@ -22,14 +24,16 @@ export const Agenda = () => {
     }
   };
 
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(datos[0]);
   const [modalStatus, setModalStatus] = useState(false);
   const [eventData, setEventData] = useState([]);
-
+    console.log(datos[0]);
+    console.log(agenda);
   const modalRef = useRef(null);
 
   useEffect(() => {
-    setEvents(agenda);
+  
+    
     window.scrollTo(0, 0);
   }, []);
 
