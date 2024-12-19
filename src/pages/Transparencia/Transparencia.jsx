@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import "./Transparencia.css";
-import { rubros } from "../../json/rubros";
 import Busqueda from "../../components/Busqueda/Busqueda";
+import { useTransparencia } from "../../hooks/useTransparencia";
 
 
 export const Transparencia = () => {
@@ -12,11 +12,11 @@ export const Transparencia = () => {
   }, []);
 
   const [busqueda, setBusqueda] = useState("");
-  const [filteredRubros, setFilteredRubros] = useState(rubros);
+  const [filteredRubros, setFilteredRubros] = useState(datos[0]);
 
   const handleSearch = (searchTerm) => {
     setBusqueda(searchTerm);
-    const filtered = rubros.filter((item) =>
+    const filtered = datos[0].filter((item) =>
       item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredRubros(filtered);
