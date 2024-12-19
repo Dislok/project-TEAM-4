@@ -12,8 +12,4 @@ const Busqueda = ({ busqueda, onSearch }) => {
   );
 };
 
-<<<<<<< HEAD
 export default Busqueda;
-=======
-export default Busqueda;
->>>>>>> main
