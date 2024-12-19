@@ -1,52 +1,43 @@
-import { useEffect } from "react";
-import { useTheme } from "../../context/ThemeContext"; 
+import { useEffect, useMemo } from "react";
+import { useTheme } from "../../context/ThemeContext";
 import { informesActividades } from "../../json/informesActividades";
-import "./informeActividades.css";
+import { Container, Row, Col } from 'react-bootstrap';
+import { InformeCard } from "./components/InformeCard";
+
 
 export const InformeActividades = () => {
-  const theme = useTheme(); 
+  const { theme } = useTheme();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const renderedInformes = useMemo(() => (
+    <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+      {informesActividades.map((item, index) => (
+        <Col key={index}>
+          <InformeCard item={item} theme={theme} />
+        </Col>
+      ))}
+    </Row>
+  ), [theme, informesActividades]);
+
   return (
-    <div className={`container ${theme === 'dark' ? 'bg-dark' : ''}`}>
-      <div className="row">
-        <div>
-          <h3 >
+    <Container className={theme === 'dark' ? 'bg-dark text-light' : 'bg-light'}>
+      <Row>
+        <Col>
+          <h3 className="mt-4 mb-3">
             Informe Anual de Actividades de la Presidenta del Patronato
           </h3>
           <hr className="hr-gob" />
-        </div>
-        {informesActividades.map((item, index) => (
-          <div key={index} className="col-md-3 col-sm-6 col-12">
-            <div className={`card_container_informe ${theme === 'dark' ? 'bg-dark' : ''}`}>
-              <div
-                className="card_img"
-                style={{ backgroundImage: `url("${item.imagen}")` }}
-              ></div>
-              <div className="card_cintillo"></div>
-              <div className="card_datos">
-                <h5 >{item.informe}</h5>
-                <h6 >{item.fecha}</h6>
-                <h6 >{item.lugar}</h6>
-              </div>
-              <div className="card_anio_informe">
-                <a href={item.url} target="_blank" rel="noopener noreferrer">
-                  <button className={`btn btn-default btn-card-anio ${theme === 'dark' ? 'btn-dark' : ''}`} type="button">
-                    {item.anio}
-                  </button>
-                </a>
-              </div>
-            </div>
-          </div>
-        ))}
-        <br />
-        <div>
-          <hr className="hr-gob" />
-        </div>
-      </div>
-    </div>
+        </Col>
+      </Row>
+      {renderedInformes}
+      <Row>
+        <Col>
+          <hr className="hr-gob mt-4 mb-4" />
+        </Col>
+      </Row>
+    </Container>
   );
 };
