@@ -1,26 +1,38 @@
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { informesActividades } from "../../json/informesActividades";
 import { Container, Row, Col } from 'react-bootstrap';
 import { InformeCard } from "./components/InformeCard";
-
+import Busqueda from "../../components/Busqueda/Busqueda";
 
 export const InformeActividades = () => {
   const { theme } = useTheme();
+  const [busqueda, setBusqueda] = useState("");
+  const [filteredInformes, setFilteredInformes] = useState(informesActividades);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  const handleSearch = (searchTerm) => {
+    setBusqueda(searchTerm);
+    console.log(informesActividades);
+    
+    const filtered = informesActividades.filter((item) =>
+      item.informe.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredInformes(filtered);
+  };
+
   const renderedInformes = useMemo(() => (
     <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-      {informesActividades.map((item, index) => (
+      {filteredInformes.map((item, index) => (
         <Col key={index}>
           <InformeCard item={item} theme={theme} />
         </Col>
       ))}
     </Row>
-  ), [theme, informesActividades]);
+  ), [theme, filteredInformes]);
 
   return (
     <Container className={theme === 'dark' ? 'bg-dark text-light' : 'bg-light'}>
@@ -30,6 +42,11 @@ export const InformeActividades = () => {
             Informe Anual de Actividades de la Presidenta del Patronato
           </h3>
           <hr className="hr-gob" />
+        </Col>
+      </Row>
+      <Row className="mb-4">
+        <Col md={6}>
+          <Busqueda busqueda={busqueda} onSearch={handleSearch} />
         </Col>
       </Row>
       {renderedInformes}
