@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const informeActividadesSlice = createSlice({
-  name: 'InformeActividades',
+export const menuSlice = createSlice({
+  name: 'Menu',
   initialState: {
     datos: [],
   },
@@ -24,4 +24,4 @@ export const informeActividadesSlice = createSlice({
     }
   }
 });
-export const { addDato, updateDato, deleteDato, clearDatos } = informeActividadesSlice.actions;
+export const { addDato, updateDato, deleteDato, clearDatos } = menuSlice.actions;

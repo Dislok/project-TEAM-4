@@ -1,15 +1,16 @@
 import "./detallerubro.css";
 import { useParams } from "react-router";
 import { useEffect } from "react";
-import { rubros } from "../../../json/rubros";
+import { useTransparencia } from "../../../hooks";
 
 export const DetalleRubro = () => {
+  const { datos } = useTransparencia();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const { nombre } = useParams();
-  const rubro = rubros.find((rubro) => rubro.nombre === nombre);
+  const rubro = datos[0].find((rubro) => rubro.nombre === nombre);
 
   return (
     <div className="container container_detalle_rubro">

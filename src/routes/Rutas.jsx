@@ -1,10 +1,16 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CambioColor, FooterComponent, Header } from '../components';
-import { Agenda, DetalleRubro, Error404, Evaluacion, InformacionInstitucional, InformeActividades, Inicio, PokemonDetail, Servicios, Transparencia } from '../pages';
+import { Agenda, DetalleRubro, Error404, Evaluacion, InformacionInstitucional, InformeActividades, Inicio, Servicios, Transparencia } from '../pages';
 import { useTheme } from '../context';
+import { useDataLoader } from '../hooks';
 
 export const Rutas = () => {
-  const { theme, } = useTheme();
+  const { theme } = useTheme();
+  const { isLoading } = useDataLoader();
+
+  if (isLoading) {
+    return <div>Cargando...</div>; 
+  }
 
   return (
     <Router>
@@ -15,9 +21,8 @@ export const Rutas = () => {
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/*" element={<Error404 />} />
-            <Route path="/pokemon/:id" element={<PokemonDetail />} />
             <Route path="/Agenda" element={<Agenda />} />
-            <Route path="/Transparencia" element={<Transparencia />} />
+            <Route path="/Rubros" element={<Transparencia />} />
             <Route path="/Transparencia/Rubros/:nombre" element={<DetalleRubro />} />
             <Route path="/InformeActividades" element={<InformeActividades />} />
             <Route path="/Servicios" element={<Servicios />} />

@@ -1,6 +1,5 @@
 export * from "./Agenda"
 export * from "./InformeActividades"
-export * from "./Products"
 export * from "./Transparencia"
 export * from "./Error"
 export * from "./Servicios"
