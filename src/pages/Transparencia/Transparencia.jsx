@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import "./Transparencia.css";
-import { useTransparencia } from "../../hooks";
+import { rubros } from "../../json/rubros";
+import Busqueda from "../../components/Busqueda/Busqueda";
 
 
 export const Transparencia = () => {
@@ -10,13 +11,25 @@ export const Transparencia = () => {
     window.scrollTo(0, 0);
   }, []);
 
+  const [busqueda, setBusqueda] = useState("");
+  const [filteredRubros, setFilteredRubros] = useState(rubros);
+
+  const handleSearch = (searchTerm) => {
+    setBusqueda(searchTerm);
+    const filtered = rubros.filter((item) =>
+      item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setFilteredRubros(filtered);
+  };
+
   return (
     <div className="container">
       <div className="row">
+        <Busqueda busqueda={busqueda} onSearch={handleSearch} />
         <div className="rubros_titulo">
           <h2>Articulo 69 Ley de Transparencia (48 Rubros)</h2>
         </div>
-        {datos[0].map((item, index) => (
+        {filteredRubros.map((item, index) => (
           <Link
             key={index}
             to={`/Transparencia/Rubros/${item.nombre}`}
