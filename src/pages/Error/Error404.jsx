@@ -7,8 +7,11 @@ export const Error404 = () => {
       <div className="row">
         <div className="col-12">
           <center>
-            <h1>Error 404: Página no encontrada</h1>
-            <p>Lo siento, la página que está buscando no existe.</p>
+            <img
+              src="../../public/error4041.jpg"
+              alt="Error 404: Página no encontrada"
+              className="error_image"
+            />
             <Link className="btn_error" to="/">
               INICIO
             </Link>
@@ -18,4 +21,3 @@ export const Error404 = () => {
     </div>
   );
 };
-
