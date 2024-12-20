@@ -1,13 +1,13 @@
 import React from "react";
 
-const Busqueda = ({ busqueda, onSearch }) => {
+const Busqueda = ({ busqueda, setBusqueda, className }) => {
   return (
     <input
-      className="form-control"
+      className={className}
       type="text"
       placeholder="Ingresa lo que quieres buscar"
       value={busqueda}
-      onChange={(e) => onSearch(e.target.value)}
+      onChange={(e) => setBusqueda(e.target.value)}
     />
   );
 };
