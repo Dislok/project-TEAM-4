@@ -1,7 +1,7 @@
 import { isMobile } from "react-device-detect";
 import { Link } from "react-router-dom";
 export const Logo = () => (
-    <Link className="nav-link active" aria-current="page" to="/">
+    <Link className="nav-link active title_p" aria-current="page" to="/">
       {isMobile ? (
         <img
           className="logo-menu"

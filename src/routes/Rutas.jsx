@@ -14,7 +14,7 @@ export const Rutas = () => {
 
   return (
     <Router>
-      <div className={`App d-flex flex-column min-vh-100 ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
+      <div className={`App d-flex flex-column min-vh-100 title_menu ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
         <Header />
         <CambioColor />
         <main className="flex-grow-1" style={{ marginTop: '7vh' }}>

@@ -1,8 +1,27 @@
-import React from 'react'
 import './inicio.css';
+import { useEffect, useMemo } from "react";
 import Bruts from '../../components/Busqueda/Bruts';
+import { team4 } from '../../json/team4';
+import { Container, Row, Col } from 'react-bootstrap';
+import { TeamCard } from "./components/TeamCard";
+import { useTheme } from "../../context/ThemeContext";
+
 
 export const Inicio = () => {
+  //TeamCard
+  const { theme } = useTheme();
+
+  const renderedTeam = useMemo(() => (
+    <Row xs={1} sm={2} md={3} lg={4} className="g-4">
+      {team4.map((item, index) => (
+        <Col key={index}>
+          <TeamCard item={item} theme={theme} />
+        </Col>
+      ))}
+    </Row>
+  ), [theme, team4]);
+//TeamCard
+
   return (
     <>
       
@@ -33,6 +52,15 @@ export const Inicio = () => {
        
 
       </div>
+      <Container>
+      {renderedTeam}
+      <Row>
+        <Col>
+          <hr className="hr-gob mt-4 mb-4" />
+        </Col>
+      </Row>
+    </Container>
     </>
   )
-}
+};
+ 
