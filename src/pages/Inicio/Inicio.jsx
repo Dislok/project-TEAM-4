@@ -26,7 +26,7 @@ export const Inicio = () => {
     <>
       
       <div id="bannerp" >
-      <div className='banner' style={{ backgroundImage: `url("https://masterscoding.com/wp-content/uploads/2020/06/Banner-817x400-05-scaled.jpg")` }}>
+      <div className='bannerp' style={{ backgroundImage: `url("https://masterscoding.com/wp-content/uploads/2020/06/Banner-817x400-05-scaled.jpg")` }}>
         {
           <Bruts />
         }
