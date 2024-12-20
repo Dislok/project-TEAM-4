@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 
 import "./agenda.css";
 import { useAgendaStore } from "../../hooks";
+import ModalComponent from "../../components/ModalComponent/ModalComponent";
 import { Row } from "react-bootstrap";
 import { Container } from "react-bootstrap";
-import ModalComponent from "../../components/ModalComponent/ModalComponent";
 
 export const Agenda = () => {
   const { datos } = useAgendaStore();
@@ -86,11 +86,11 @@ export const Agenda = () => {
               />
             ) : 
             null}
-            <div className="container">
+            <Container>
               <div className="agenda">
                 <FullCalendar {...calendarOptions} locale={esLocale} />
               </div>
-            </div>
+            </Container>
           </Row>
         </Container>
       </div>

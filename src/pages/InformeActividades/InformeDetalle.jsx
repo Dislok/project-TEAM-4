@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 import { informesActividades } from '../../json/informesActividades';
 import { useTheme } from '../../context/ThemeContext';
@@ -9,12 +9,17 @@ export const InformeDetalle = () => {
   const { anio } = useParams();
   const { theme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
   
   const informe = location.state?.informe || informesActividades.find(item => item.anio === anio);
 
   if (!informe) {
     return <div>Informe no encontrado</div>;
   }
+
+  const handleGoBack = () => {
+    navigate(-1);
+  };
 
   return (
     <Container className="my-5">
@@ -41,6 +46,15 @@ export const InformeDetalle = () => {
               </div>
             </Card.Body>
           </Card>
+          <div className="text-center mt-3">
+            <Button 
+              
+              onClick={handleGoBack}
+              className={`informe-button ${theme === 'dark' ? 'dark-theme' : ''}`}
+            >
+              Regresar
+            </Button>
+          </div>
         </Col>
       </Row>
     </Container>
