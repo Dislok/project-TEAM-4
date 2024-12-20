@@ -8,6 +8,11 @@
     width: 200px;
     height: auto;
 }
+
+.title_p {
+    text-align: left;
+}
+
 .navbar-collapse{
     justify-content: end;
 }
