@@ -8,7 +8,7 @@ import { agenda } from "../../json/agenda";
 import { useAgendaStore } from "../../hooks";
 import { Row } from "react-bootstrap";
 import { Container } from "react-bootstrap";
-import ModalComponent from "../../components/ModalComponent/ModalComponents";
+import ModalComponent from "../../components/ModalComponent/ModalComponent";
 
 export const Agenda = () => {
   const { datos } = useAgendaStore();
