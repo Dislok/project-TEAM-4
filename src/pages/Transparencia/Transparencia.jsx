@@ -16,12 +16,15 @@ export const Transparencia = () => {
     }
   }, [datos]);
 
-  const handleBusqueda = (texto) => {
-    setBusqueda(texto);
-    const datosFiltrados = datos[0].filter((item) =>
-      item.nombre.toLowerCase().includes(texto.toLowerCase())
-    );
-    setResultados(datosFiltrados);
+  const handleBusqueda = () => {
+    if (busqueda === '') {
+      setResultados(datos[0]);
+    } else {
+      const datosFiltrados = datos[0].filter((item) =>
+        item.nombre.toLowerCase().includes(busqueda.toLowerCase())
+      );
+      setResultados(datosFiltrados);
+    }
   };
 
   useEffect(() => {
@@ -32,30 +35,29 @@ export const Transparencia = () => {
     <div className="container">
       <div className="row">
         {/* Barra de búsqueda */}
-        <Busqueda busqueda={busqueda} onSearch={handleBusqueda} />
+        <div className="busqueda-container">
+          <Busqueda busqueda={busqueda} setBusqueda={setBusqueda} className={'input-busqueda'} />
+          <button className="btn-buscar" onClick={handleBusqueda}>Buscar</button>
+        </div>
         <div className="rubros_titulo">
           <h2>Articulo 69 Ley de Transparencia (48 Rubros)</h2>
         </div>
-        {resultados.map((item, index) => (
-          <Link
-            key={index}
-            to={`/Transparencia/Rubros/${item.nombre}`}
-            className="col-md-4 col-sm-6 col-12 rubro_enlace"
-          >
-            <div className="rubro_container">
-              <div className="rubro_icono">
+        <div className="container-cards">
+          {
+            resultados.map((item, index) => (
+              <Link key={index}
+                to={`/Transparencia/Rubros/${item.nombre}`}
+                className="transparencia-card"
+              >
                 <img
-                  src={
-                    "http://cdn.hidalgo.gob.mx/plantilla_secretarial/Rubros/PNG/" +
-                    item.icono
-                  }
+                  src={"http://cdn.hidalgo.gob.mx/plantilla_secretarial/Rubros/PNG/" + item.icono}
                   alt={item.nombre}
                 />
-              </div>
-              <h3>{item.nombre}</h3>
-            </div>
-          </Link>
-        ))}
+                <h3 className="card-text">{item.nombre}</h3>
+              </Link>
+            ))
+          }
+        </div>
 
         {/* Enlace adicional */}
         <Link className="rubros_historicos" to="RubrosHistoricos">

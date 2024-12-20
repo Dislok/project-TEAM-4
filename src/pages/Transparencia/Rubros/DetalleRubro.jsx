@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import { useTransparencia } from "../../../hooks";
 
 export const DetalleRubro = () => {
+
+  const excelIcon = '/excelIcon.svg';
+  const tableIcon = '/tableIcon.svg';
+
   const { datos } = useTransparencia();
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -17,21 +21,15 @@ export const DetalleRubro = () => {
       <div className="row">
         <div className="col-12">
           <div className="rubro_titulo">
-            <h3 className="title">{rubro.nombre}</h3>
+            <h3>{rubro.nombre}</h3>
             <hr className="hr-gob" />
           </div>
         </div>
       </div>
-      <div className="row">
+      <div className="row container-buttons">
         {rubro.formatos.map((formato, index) => {
-          const urlXLSX =
-            "https://dif.hidalgo.gob.mx/Transparencia/xlsx/a69_" +
-            formato.xlsx +
-            "DIFH.xlsx";
-          const urlHTML =
-            "https://dif.hidalgo.gob.mx/Transparencia/htm/a69_" +
-            formato.html +
-            "DIFH.htm";
+          const urlXLSX = `https://dif.hidalgo.gob.mx/Transparencia/xlsx/a69_${formato.xlsx}DIFH.xlsx`;
+          const urlHTML = `https://dif.hidalgo.gob.mx/Transparencia/htm/a69_${formato.html}DIFH.htm`;
           return (
             <div key={index} className="col-md-4 col-12">
               <div className="rubro_container_detalle">
@@ -43,13 +41,15 @@ export const DetalleRubro = () => {
                     href={formato.xlsx_liga ? formato.xlsx_liga : urlXLSX}
                     target="_blank"
                   >
+                    <div className='icono' style={{ maskImage: `url(${excelIcon})`, WebkitMaskImage: `url(${excelIcon})` }} />
                     XLSX
                   </a>
                   <a
                     href={formato.htm_liga ? formato.htm_liga : urlHTML}
                     target="_blank"
                   >
-                    Ver Tabla
+                    <div className='icono' style={{ maskImage: `url(${tableIcon})`, WebkitMaskImage: `url(${tableIcon})` }} />
+                    Tabla
                   </a>
                 </div>
               </div>
@@ -60,4 +60,3 @@ export const DetalleRubro = () => {
     </div>
   );
 };
-
