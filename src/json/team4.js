@@ -23,6 +23,11 @@ export const team4 = [
         "imagen" : "https://icathi.edu.mx/img/curso/rolando-Monzalvo.jpg",
         "cargo" : "Apoyo",
         "nombre" : "Ronaldo Monzalvo Vazquez"
+    },
+    {
+        "imagen" : "/Team4.jpg",
+        "cargo" : "Apoyo",
+        "nombre" : "Mireidy Yañez Reyes"
     }
 
 ]

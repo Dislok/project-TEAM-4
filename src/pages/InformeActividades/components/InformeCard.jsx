@@ -15,15 +15,7 @@ export const InformeCard = React.memo(({ item, theme }) => (
         {item.fecha}<br />
         {item.lugar}
       </Card.Text>
-      <Button 
-        variant={theme === 'dark' ? 'outline-light' : 'outline-dark'} 
-        href={item.url} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="mt-auto"
-      >
-        {item.anio}
-      </Button>
+      
     </Card.Body>
   </Card>
 ));

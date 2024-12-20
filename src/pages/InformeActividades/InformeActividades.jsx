@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { informesActividades } from "../../json/informesActividades";
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { InformeCard } from "./components/InformeCard";
 import Busqueda from "../../components/Busqueda/Busqueda";
-
 
 export const InformeActividades = () => {
   const { theme } = useTheme();
@@ -17,15 +16,16 @@ export const InformeActividades = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSearch = () => {
+  const handleSearch = useCallback(() => {
     const filtered = informesActividades.filter((item) =>
       item.informe.toLowerCase().includes(busqueda.toLowerCase())
     );
     setFilteredInformes(filtered);
-  };
-  const handleInformeClick = (item) => {
+  }, [busqueda]);
+
+  const handleInformeClick = useCallback((item) => {
     navigate(`/InformeActividades/${item.anio}`, { state: { informe: item } });
-  };
+  }, [navigate]);
 
   const renderedInformes = useMemo(() => (
     <Row xs={1} sm={2} md={3} lg={4} className="g-4">
@@ -37,7 +37,8 @@ export const InformeActividades = () => {
         </Col>
       ))}
     </Row>
-  ), [theme, filteredInformes, navigate]);
+  ), [theme, filteredInformes, handleInformeClick]);
+
 
   return (
     <Container>

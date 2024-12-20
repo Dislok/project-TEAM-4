@@ -1,5 +1,6 @@
 .informe-card {
   transition: all 0.3s ease;
+  border: 2px solid #eca02d
 }
 
 .informe-card:hover {
