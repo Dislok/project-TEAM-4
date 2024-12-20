@@ -36,3 +36,6 @@
 .bg-dark .tarjeta h5:hover {
     color: rgb(255, 0, 68);
 }
+.container {
+    margin-top: 2rem;
+}

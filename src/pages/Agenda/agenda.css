@@ -1,5 +1,7 @@
 #calendar{
     position: relative;
+    margin-top: 2rem; 
+    
 }
 #modal-agenda{
     width: 500px;

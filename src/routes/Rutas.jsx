@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CambioColor, FooterComponent, Header } from '../components';
 import { Agenda, DetalleRubro, Error404, Evaluacion, InformacionInstitucional, InformeActividades, InformeDetalle, Inicio, Servicios, Transparencia } from '../pages';
@@ -8,6 +9,7 @@ import { Container, Spinner } from 'react-bootstrap';
 export const Rutas = () => {
   const { theme } = useTheme();
   const { isLoading } = useDataLoader();
+  const [headerHeight, setHeaderHeight] = useState(0);
 
   if (isLoading) {
     return (
@@ -27,10 +29,10 @@ export const Rutas = () => {
 
   return (
     <Router>
+      <Header onHeightChange={setHeaderHeight} />
       <Container fluid className={`d-flex flex-column min-vh-100 p-0 ${theme === 'dark' ? 'bg-dark text-light' : 'bg-light text-dark'}`}>
-        <Header />
         <CambioColor />
-        <Container fluid as="main" className="flex-grow-1 px-0" style={{ marginTop: '7vh' }}>
+        <Container fluid as="main" className="flex-grow-1 px-0" style={{ marginTop: `${headerHeight-26}px` }}>
           <Routes>
             <Route path="/" element={<Inicio />} />
             <Route path="/*" element={<Error404 />} />
