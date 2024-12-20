@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { informesActividades } from "../../json/informesActividades";
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { InformeCard } from "./components/InformeCard";
 import Busqueda from "../../components/Busqueda/Busqueda";
+
 
 export const InformeActividades = () => {
   const { theme } = useTheme();
@@ -16,14 +17,12 @@ export const InformeActividades = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const handleSearch = (searchTerm) => {
-    setBusqueda(searchTerm);
+  const handleSearch = () => {
     const filtered = informesActividades.filter((item) =>
-      item.informe.toLowerCase().includes(searchTerm.toLowerCase())
+      item.informe.toLowerCase().includes(busqueda.toLowerCase())
     );
     setFilteredInformes(filtered);
   };
-
   const handleInformeClick = (item) => {
     navigate(`/InformeActividades/${item.anio}`, { state: { informe: item } });
   };
@@ -50,9 +49,12 @@ export const InformeActividades = () => {
           <hr className="hr-gob" />
         </Col>
       </Row>
-      <Row className="mb-4">
+      <Row className="mb-4 justify-content-center">
         <Col md={6}>
-          <Busqueda busqueda={busqueda} onSearch={handleSearch} />
+          <div className="busqueda-container d-flex justify-content-center">
+            <Busqueda busqueda={busqueda} setBusqueda={setBusqueda} className="input-busqueda" />
+            <Button className="btn-buscar" onClick={handleSearch}>Buscar</Button>
+          </div>
         </Col>
       </Row>
       {renderedInformes}
