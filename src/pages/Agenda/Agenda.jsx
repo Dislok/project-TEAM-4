@@ -87,11 +87,11 @@ export const Agenda = () => {
               />
             ) : 
             null}
-            <div className="container">
+            <Container>
               <div className="agenda">
                 <FullCalendar {...calendarOptions} locale={esLocale} />
               </div>
-            </div>
+            </Container>
           </Row>
         </Container>
       </div>
