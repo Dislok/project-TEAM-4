@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTheme } from "../../context/ThemeContext";
 import { informesActividades } from "../../json/informesActividades";
 import { Container, Row, Col } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { InformeCard } from "./components/InformeCard";
 import Busqueda from "../../components/Busqueda/Busqueda";
 
@@ -9,6 +10,7 @@ export const InformeActividades = () => {
   const { theme } = useTheme();
   const [busqueda, setBusqueda] = useState("");
   const [filteredInformes, setFilteredInformes] = useState(informesActividades);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -16,26 +18,30 @@ export const InformeActividades = () => {
 
   const handleSearch = (searchTerm) => {
     setBusqueda(searchTerm);
-    console.log(informesActividades);
-    
     const filtered = informesActividades.filter((item) =>
       item.informe.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredInformes(filtered);
   };
 
+  const handleInformeClick = (item) => {
+    navigate(`/InformeActividades/${item.anio}`, { state: { informe: item } });
+  };
+
   const renderedInformes = useMemo(() => (
     <Row xs={1} sm={2} md={3} lg={4} className="g-4">
       {filteredInformes.map((item, index) => (
         <Col key={index}>
-          <InformeCard item={item} theme={theme} />
+          <div onClick={() => handleInformeClick(item)} style={{ cursor: 'pointer' }}>
+            <InformeCard item={item} theme={theme} />
+          </div>
         </Col>
       ))}
     </Row>
-  ), [theme, filteredInformes]);
+  ), [theme, filteredInformes, navigate]);
 
   return (
-    <Container className={theme === 'dark' ? 'bg-dark text-light' : 'bg-light'}>
+    <Container>
       <Row>
         <Col>
           <h3 className="mt-4 mb-3">

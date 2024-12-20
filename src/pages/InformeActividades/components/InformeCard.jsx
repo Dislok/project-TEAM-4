@@ -1,9 +1,9 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import './InformeCard.css'; // Asegúrate de crear este archivo CSS
+import './InformeCard.css';
 
 export const InformeCard = React.memo(({ item, theme }) => (
-  <Card className={`h-100 informe-card ${theme === 'dark' ? 'bg-dark text-light' : ''}`}>
+  <Card className={`h-100 informe-card ${theme === 'dark' ? 'dark-theme' : ''}`}>
     <Card.Img 
       variant="top" 
       src={item.imagen} 

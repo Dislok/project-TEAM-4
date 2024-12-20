@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CambioColor, FooterComponent, Header } from '../components';
-import { Agenda, DetalleRubro, Error404, Evaluacion, InformacionInstitucional, InformeActividades, Inicio, Servicios, Transparencia } from '../pages';
+import { Agenda, DetalleRubro, Error404, Evaluacion, InformacionInstitucional, InformeActividades, InformeDetalle, Inicio, Servicios, Transparencia } from '../pages';
 import { useTheme } from '../context';
 import { useDataLoader } from '../hooks';
 import { Container, Spinner } from 'react-bootstrap';
@@ -38,6 +38,7 @@ export const Rutas = () => {
             <Route path="/Rubros" element={<Transparencia />} />
             <Route path="/Transparencia/Rubros/:nombre" element={<DetalleRubro />} />
             <Route path="/InformeActividades" element={<InformeActividades />} />
+            <Route path="/InformeActividades/:anio" element={<InformeDetalle />} />
             <Route path="/Servicios" element={<Servicios />} />
             <Route path="/Evaluacion" element={<Evaluacion />} />
             <Route path="/InformacionInstitucional" element={<InformacionInstitucional />} />

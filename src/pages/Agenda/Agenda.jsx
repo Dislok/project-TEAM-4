@@ -4,7 +4,6 @@ import FullCalendar from "@fullcalendar/react";
 import { useEffect, useRef, useState } from "react";
 
 import "./agenda.css";
-import { agenda } from "../../json/agenda";
 import { useAgendaStore } from "../../hooks";
 import { Row } from "react-bootstrap";
 import { Container } from "react-bootstrap";

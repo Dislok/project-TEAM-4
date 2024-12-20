@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
 import "./evaluacion.css";
-import { useTheme } from "../../context/ThemeContext";
 import { DocumentTable, useEvaluacionData } from "./components";
 
 
 export const Evaluacion = () => {
-  const { theme } = useTheme();
   const { documentData } = useEvaluacionData();
 
   useEffect(() => {
@@ -14,7 +12,7 @@ export const Evaluacion = () => {
   }, []);
 
   return (
-    <Container className={theme === 'dark' ? 'bg-dark text-light' : 'bg-light'}>
+    <Container >
       <Row>
         <Col>
           <h2 className="ldf_titulo">Evaluación y Monitoreo a Programas 2024</h2>
