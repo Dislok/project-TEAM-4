@@ -1,25 +1,32 @@
-import React from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import React from "react";
+import { Modal, Button } from "react-bootstrap";
+import PropTypes from "prop-types";
 
-const ModalComponent = ({title,onSave,onCloseModal,renderBody}) => {
+const ModalComponent = ({ title, onCloseModal, renderBody }) => {
   return (
-    <Modal.Dialog>
-    <Modal.Header >
-      <Modal.Title>
-        {title}
-      </Modal.Title>
-    </Modal.Header>
+    <Modal
+      show={true}
+      onHide={onCloseModal}
+      centered
+      className="custom-modal"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>{title}</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>{renderBody}</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={onCloseModal}>
+          Cerrar
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
-    <Modal.Body>
-      {renderBody}
-    </Modal.Body>
+ModalComponent.propTypes = {
+  title: PropTypes.string.isRequired,
+  onCloseModal: PropTypes.func.isRequired,
+  renderBody: PropTypes.node.isRequired,
+};
 
-    <Modal.Footer>
-      <Button onClick={onCloseModal} variant="secondary">Close</Button>
-   { onSave  && <Button variant="primary" onClick={onSave} >Save changes</Button>}
-    </Modal.Footer>
-  </Modal.Dialog>
-  )
-}
-
-export default ModalComponent
+export default ModalComponent;
