@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import "./header.css";
 import { Logo, MenuItem, MenuToggle } from "./components";
 import { useTheme } from "../../context";
@@ -15,7 +16,6 @@ export const Header = () => {
   const handleMouseLeave = () => setActiveSubmenu(null);
 
   const hideMenu = () => {
-    document.getElementById("navbarNav").classList.remove("show");
     setOverlay(false);
   };
 
@@ -27,58 +27,47 @@ export const Header = () => {
         <div
           onClick={() => setOverlay(false)}
           className="overlay-menu"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
         />
       )}
 
-      <div id="header">
-        <nav
-          className={`navbar navbar-expand-lg navbar-light ${
-            theme === "dark" ? "bg-gob-dark" : "bg-gob"
-          }`}
-        >
-          <div className="container-fluid">
-            <Logo />
-            <MenuToggle setOverlay={setOverlay} />
-            <div
-              className="collapse navbar-collapse second-navbar-gob"
-              id="navbarNav"
+      <Navbar 
+        expand="lg" 
+        className={`${theme === "dark" ? "bg-gob-dark" : "bg-gob"}`}
+        id="header"
+      >
+        <Container fluid>
+          <Logo />
+          <MenuToggle setOverlay={setOverlay} />
+          <Navbar.Collapse id="navbarNav" className="second-navbar-gob">
+            <Nav 
+              id="menu-list" 
+              onClick={() => {
+                setActiveSubmenu(null);
+                hideMenu();
+              }}
             >
-              <ul
-                id="menu-list"
-                className="navbar-nav"
-                onClick={() => {
-                  setActiveSubmenu(null);
-                  hideMenu();
-                }}
-              >
-                <li className="nav-item">
-                  <Link to="/" className="nav-link">
-                    Inicio
-                  </Link>
-                </li>
-                {isDataReady ? (
-                  datos[0].map((item, index) => (
-                    <MenuItem
-                      key={index}
-                      item={item}
-                      activeSubmenu={activeSubmenu}
-                      handleMouseEnter={handleMouseEnter}
-                      handleMouseLeave={handleMouseLeave}
-                    />
-                  ))
-                ) : (
-                  <li className="nav-item">
-                    <span className="nav-link">Cargando...</span>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
+              <Nav.Item>
+                <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+              </Nav.Item>
+              {isDataReady ? (
+                datos[0].map((item, index) => (
+                  <MenuItem
+                    key={index}
+                    item={item}
+                    activeSubmenu={activeSubmenu}
+                    handleMouseEnter={handleMouseEnter}
+                    handleMouseLeave={handleMouseLeave}
+                  />
+                ))
+              ) : (
+                <Nav.Item>
+                  <Nav.Link>Cargando...</Nav.Link>
+                </Nav.Item>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     </>
   );
 };

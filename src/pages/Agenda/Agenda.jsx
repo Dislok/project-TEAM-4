@@ -3,10 +3,12 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import { useEffect, useRef, useState } from "react";
 
-
 import "./agenda.css";
 import { agenda } from "../../json/agenda";
 import { useAgendaStore } from "../../hooks";
+import { Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import ModalComponent from "../../components/ModalComponent/ModalComponents";
 
 export const Agenda = () => {
   const { datos } = useAgendaStore();
@@ -27,12 +29,10 @@ export const Agenda = () => {
   const [events, setEvents] = useState(datos[0]);
   const [modalStatus, setModalStatus] = useState(false);
   const [eventData, setEventData] = useState([]);
-  
+
   const modalRef = useRef(null);
 
   useEffect(() => {
-  
-    
     window.scrollTo(0, 0);
   }, []);
 
@@ -52,48 +52,49 @@ export const Agenda = () => {
     eventClick: handleEventClick,
   };
 
+  const renderBody = () => {
+    return (
+      <>
+        <p className="agenda-location">
+           <i className="fa-solid fa-location-dot"></i>
+           {eventData[1]}
+          
+        </p>
+        <iframe
+          id="url"
+          src={eventData[2]}
+          className="twitter-embed"
+          allow="encrypted-media"
+        ></iframe>
+      </>
+    );
+  };
+
   return (
     <>
       <div id="calendar">
-        <div className="container">
-          <div className="row">
+        <Container>
+          <Row>
             <div>
               <h3 className="title">Agenda del Titular</h3>
               <hr className="hr-gob" />
             </div>
             {modalStatus ? (
-              <div ref={modalRef} id="modal-agenda">
-                <div className="close-icon">
-                  <i
-                    className="fa-sharp fa-solid fa-xmark"
-                    onClick={() => {
-                      setModalStatus(false);
-                    }}
-                  />
-                </div>
-                <p className="agenda-title">{eventData[0]}</p>
-                <p className="agenda-location">
-                  <i className="fa-solid fa-location-dot"></i>
-                  {eventData[1]}
-                </p>
-
-                <iframe
-                  id="url"
-                  src={eventData[2]}
-                  className="twitter-embed"
-                  allow="encrypted-media"
-                ></iframe>
-              </div>
-            ) : null}
+              <ModalComponent
+                title={eventData[0]}
+                onCloseModal={() => setModalStatus(false)}
+                renderBody={renderBody()}
+              />
+            ) : 
+            null}
             <div className="container">
               <div className="agenda">
                 <FullCalendar {...calendarOptions} locale={esLocale} />
               </div>
             </div>
-          </div>
-        </div>
+          </Row>
+        </Container>
       </div>
     </>
   );
 };
-
